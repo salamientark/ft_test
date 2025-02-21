@@ -42,5 +42,4 @@ export async function registerUser(request, reply) {
 		console.log(error);
 		return reply.code(500).send("Internal server error");
 	}
-	console.log("Registering user");
 };

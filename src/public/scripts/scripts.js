@@ -32,6 +32,11 @@
 /* ************************************************************************** */
 /*                             REGISTER SCRIPTS                               */
 /* ************************************************************************** */
+/**
+ * @brief get the register page view
+ *
+ * Send AJAX request to get register page view
+ */
 function getRegisterView() {
 	const xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -92,6 +97,12 @@ function register() {
 /* ************************************************************************** */
 /*                               LOGIN SCRIPTS                                */
 /* ************************************************************************** */
+/**
+ * @brief get the login page view
+ *
+ * Send AJAX request to get login page view
+ * @param msg [OPTIONNAL] The message to be printed in the login info space
+ */
 function getLoginView(msg) {
 	const xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -105,6 +116,11 @@ function getLoginView(msg) {
 	xhttp.send();
 };
 
+/**
+ * @brief Perform login request
+ *
+ * Send AJAX login request (get JWT token)
+ */
 function loginUser() {
 	const formData = new FormData(document.getElementById("login-form"));
 	const xhttp = new XMLHttpRequest();
@@ -114,9 +130,30 @@ function loginUser() {
 			setFormInfoMsg(this.responseText);
 		}
 		if (this.readyState == 4 && this.status == 200) {
-			setFormInfoMsg(this.responseText);
+			document.getElementById("main").innerHTML = this.responseText;
 		}
 	};
 	xhttp.open("POST", "/auth/login", true);
 	xhttp.send(formData);
 }
+
+/**
+ * @brief Logout user
+ *
+ * Lougout user
+ */
+function logout() {
+	const xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function() {
+		// if (this.readyState == 4 && this.status == 401) {
+		// 	setFormInfoMsg(this.responseText);
+		// }
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("main").innerHTML = this.responseText;
+		}
+		console.log("Succesfule logout");
+	};
+	xhttp.open("GET", "/secure/logout");
+	xhttp.send();
+};

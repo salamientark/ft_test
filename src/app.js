@@ -44,14 +44,14 @@ const initServer = async () => {
 	fastify.register(fastifyMultipart, { attachFieldsToBody: true });
 	fastify.register(dbConnector);
 	
-	// jwt
-	fastify.register(jwt);
-
 	// cookies
 	fastify.register(fastifyCookie, {
 		secret: process.env.COOKIE_SECRET,
-		hook: "preHandler"
+		// hook: "preHandler"
 	});
+	// jwt
+	fastify.register(jwt);
+
 
 	await fastify.register(routes);
 

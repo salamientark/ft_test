@@ -44,19 +44,19 @@ export async function loginUser(request, reply) {
 	let token;
 	try {
 		token = request.server.jwt.sign({ email: dbUser.email, username: dbUser.username });
-		console.log(token);
-		console.log("In login");
 	} catch(err) {
 		console.log(err);
 		return reply.status(500).send("Internal server error");
 	}
-	console.log(token);
 
 	// Prepare response
-	reply.setCookie("access_token", token, {
+	return reply.setCookie("access_token", token, {
 		path: "/",
+		secure: true,
 		httpOnly: true,
-		secure: true
-	});
-	return ({ accessToken: token });
+		sameSite: true
+	})
+	.code(200)
+	// .redirect("/");
+	.view("game", { title: "Game "});
 }
