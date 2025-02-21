@@ -27,7 +27,7 @@ export async function loginUser(request, reply) {
 	const validateInput = ajv.getSchema("login");
 	if (!validateInput({ username, password })) {
 		return reply.code(400).send(
-			validateLogin.errors
+			validateInput.errors
 		);
 	}
 
