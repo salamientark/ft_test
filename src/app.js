@@ -4,7 +4,8 @@ import fastifyEnv from "@fastify/env";
 import fastifyView from "@fastify/view";
 import fastifyMultipart from "@fastify/multipart";
 import fastifyStatic from "@fastify/static";
-// import fastifyJwt from "@fastify/jwt";
+import fastifyCookie from "@fastify/cookie";
+
 import dbConnector from "./config/db.js";
 import jwt from "./config/jwt.js";
 
@@ -27,7 +28,6 @@ const options = {
 };
 
 const initServer = async () => {
-	console.log(path.join(__dirname, "views"))
 	await fastify.register(fastifyEnv, options);
 	fastify.register(fastifyStatic, {
 		root: path.join(__dirname, "public"),
@@ -43,6 +43,15 @@ const initServer = async () => {
 	});
 	fastify.register(fastifyMultipart, { attachFieldsToBody: true });
 	fastify.register(dbConnector);
+	
+	// jwt
+	fastify.register(jwt);
+
+	// cookies
+	fastify.register(fastifyCookie, {
+		secret: process.env.COOKIE_SECRET,
+		hook: "preHandler"
+	});
 
 	await fastify.register(routes);
 

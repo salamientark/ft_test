@@ -4,8 +4,9 @@ import env from "./env.js";
 
 async function jwt(fastify, options) {
 	fastify.register(fastifyJwt, {
-		secret: process.env.JWTSECRET,
+		secret: process.env.JWT_SECRET,
 	});
+
 	fastify.decorate("authenticate", async function (request, reply) {
 		try {
 			await request.jwtVerify();

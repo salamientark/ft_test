@@ -1,4 +1,5 @@
 import ajv from "../config/ajv.js";
+import { hashPassword } from "../config/bcrypt.js";
 
 export function getRegisterView(request, reply) {
 	return reply.view("register", { title: "register" });
@@ -31,12 +32,15 @@ export async function registerUser(request, reply) {
 	if (db.prepare(`SELECT username FROM users WHERE username = ?;`).all(username).length > 0) {
 		return reply.code(400).send("Username already taken");
 	}
-	console.log("Registering user");
 
-	// Check for already existing user
-	
-	registerStatement.run(username, password, email);
-	reply.status(200).send("User registered");
-	// return reply.view("login", { title: "Login" });
-	// return reply.redirect("/", 200);
+	// Hash password and register user
+	try {
+		const hashedPassword = await hashPassword(password);
+		registerStatement.run(username, hashedPassword, email);
+		reply.status(200).send("User registered");
+	} catch (error) {
+		console.log(error);
+		return reply.code(500).send("Internal server error");
+	}
+	console.log("Registering user");
 };

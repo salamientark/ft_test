@@ -1,7 +1,7 @@
 <div id="login-home" class="container">
 	<h1>Login</h1>
 	<div id="auth-form-enc">
-			<form id="login-form" action="/login" method="post">
+			<form id="login-form" action="/auth/login" method="post">
 				<div class="login-info">
 					<label for="username">Username:</label>
 					<input type="text" id="username" name="username" required><br>
@@ -9,7 +9,7 @@
 					<input type="password" id="password" name="password" required><br>
 				</div>
 				<div class="login-button">
-					<input type="submit" value="Login">
+					<button type="button" onclick="loginUser()">Login</button>
 					<button type="button" onclick="location.href='#'">Forgot password?</button>
 					<button type="button" onclick="getRegisterView()"> Register</button>
 				</div>

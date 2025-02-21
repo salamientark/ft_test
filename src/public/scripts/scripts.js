@@ -104,3 +104,19 @@ function getLoginView(msg) {
 	xhttp.open("GET", "/auth/login", true);
 	xhttp.send();
 };
+
+function loginUser() {
+	const formData = new FormData(document.getElementById("login-form"));
+	const xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 401) {
+			setFormInfoMsg(this.responseText);
+		}
+		if (this.readyState == 4 && this.status == 200) {
+			setFormInfoMsg(this.responseText);
+		}
+	};
+	xhttp.open("POST", "/auth/login", true);
+	xhttp.send(formData);
+}

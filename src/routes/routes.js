@@ -4,7 +4,7 @@ import { getRoot } from "../controllers/root.controller.js";
 
 export default async function routes(fastify, options) {
 	// fastify.get("/", getRoot);
-	fastify.get("/", getLoginView);
+	fastify.get("/", { onRequest: [fastify.authenticate] }, getRoot);
 	// fastify.get("/root", getLogin);
 	fastify.register(
 		async function (authRoute) {
@@ -14,6 +14,7 @@ export default async function routes(fastify, options) {
 
 			// Request
 			authRoute.post("/register/new", registerUser);
+			authRoute.post("/login", loginUser);
 		},
 		{ prefix: "/auth" }
 	);
