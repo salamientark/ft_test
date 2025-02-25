@@ -157,3 +157,30 @@ function logout() {
 	xhttp.open("GET", "/secure/logout");
 	xhttp.send();
 };
+
+/* ************************************************************************** */
+/*                             BLOCKCHAIN OBSERVER                              */
+/* ************************************************************************** */
+function getAllTournamentScore() {
+	const xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("main").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", "/secure/tournament/score", true);
+	xhttp.send();
+}
+
+function saveScore() {
+	const formData = new FormData(document.getElementById("tournament-result"));
+	const xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("main").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("POST", "/secure/tournament/score", true);
+	xhttp.send(formData);
+}

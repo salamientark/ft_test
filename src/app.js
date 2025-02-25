@@ -7,6 +7,7 @@ import fastifyStatic from "@fastify/static";
 import fastifyCookie from "@fastify/cookie";
 
 import dbConnector from "./config/db.js";
+import web3Connector from "./config/web3.js";
 import jwt from "./config/jwt.js";
 
 import env from "./config/env.js";
@@ -52,6 +53,8 @@ const initServer = async () => {
 	// jwt
 	fastify.register(jwt);
 
+	// web3
+	fastify.register(web3Connector);
 
 	await fastify.register(routes);
 

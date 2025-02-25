@@ -1,6 +1,26 @@
 <div id="game" class="container">
 	<h1>Game</h1>
 	<div>
+		<div id="test-web3-get-all-tournament">
+			<button type="button" onclick="getAllTournamentScore()">Get all Tournament result</button>
+		</div>
+		<div id="test-web3-get-one-tournament">
+			<input id="get-tournament-id" type="text"/>
+			<button type="button" onclick="">Get one Tournament result</button>
+		</div>
+		<div id="test-web3-add-tournament-score">
+			<form id="tournament-result" action="/secure/tournament/score" method="post">
+				<label for="player-one-name">Player One Name:</label>
+				<input id="player-one-name" name="player-one-name" type="text"/>
+				<label for="player-two-name">Player Two Name:</label>
+				<input id="player-two-name" name="player-two-name" type="text"/>
+				<label for="player-one-score">Player One Score:</label>
+				<input id="player-one-score" name="player-one-score" type="text"/>
+				<label for="player-two-score">Player Two Score:</label>
+				<input id="player-two-score" name="player-two-score" type="text"/>
+				<button type="button" onclick="saveScore()">Save Tournament Result</button>
+			</form>
+		</div>
 		<button type="button" onclick="logout()">logout</button>
 	</div>
 </div>
