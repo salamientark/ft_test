@@ -1,0 +1,11 @@
+services:
+
+  backend:
+    container_name: backend
+    build: ./containers/backend/.
+    ports:
+      - 3000:3000
+
+  frontend:
+    container_name: frontend
+    build: ./containers/frontend/.
