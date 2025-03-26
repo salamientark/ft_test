@@ -12,7 +12,7 @@ RUN npm install -D typescript @types/node
 
 COPY --chown=node:node conf ./
 
-EXPOSE 3001
+EXPOSE 3000
 
 ENTRYPOINT ["npm"]
 CMD ["run", "start"]

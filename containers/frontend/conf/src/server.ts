@@ -28,7 +28,7 @@ const initServer = async (): Promise<FastifyInstance> => {
 
 	frontend.register(fastifyStatic, {
 		root: path.join(__dirname, "../src/public"),
-		prefix: "/"
+		prefix: "/public",
 	});
 
 	frontend.register(routes);
@@ -40,7 +40,7 @@ const startServer = async (): Promise<void> => {
 	try {
 		initServer();
 		await frontend.ready();
-		frontend.listen({ host: "0.0.0.0", port: 3001 });
+		frontend.listen({ host: "0.0.0.0", port: 3000 });
 	} catch (err: any) {
 		frontend.log.error(err);
 		process.exit(1);
