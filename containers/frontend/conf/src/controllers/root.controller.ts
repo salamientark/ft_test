@@ -11,7 +11,7 @@ export async function getRoot(request: FastifyRequest, reply: FastifyReply) {
 		const	scriptBuffer = await response.text();
 		const	script = unescapeHtml(scriptBuffer.toString());
 		console.log(script);
-		return reply.view("pong", { title: "Pong", script: script });
+		return reply.view("pong", { title: "Pong", script: unescapeHtml(script) });
 	} catch (err) {
 		reply.code(500).send("Internal server error");
 	}

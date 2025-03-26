@@ -8,7 +8,7 @@ RUN npm install
 
 COPY --chown=node:node conf ./
 
-EXPOSE 3000
+EXPOSE 3001
 
 ENTRYPOINT ["npm"]
 CMD ["run", "start"]

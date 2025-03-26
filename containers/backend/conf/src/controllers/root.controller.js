@@ -1,6 +1,14 @@
-// import slugify from "slugify";
-// import Ajv from "ajv";
+import fetch from "node-fetch";
 
-export function getRoot(request, reply) {
-	return reply.view("game", { title: "Game" });
+export default async function getRoot(request, reply) {
+	try {
+		const response = await  fetch('http://pong:3002');
+		if (!response.ok)
+			return reply.code(404).send("Game script not found");
+		console.log("Fetching game");
+		reply.header('Content-Type', 'application/javascript');
+		return reply.code(200).send(await response.text());
+	} catch (err) {
+		reply.code(500).send("Internal server error");
+	}
 }

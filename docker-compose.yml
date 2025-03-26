@@ -1,11 +1,37 @@
+# ############################################################################ #
+#                                 NETWORKS                                     #
+# ############################################################################ #
+networks:
+  ft_test:
+    driver: bridge
+
+# ############################################################################ #
+#                                 SERVICES                                     #
+# ############################################################################ #
 services:
 
-  backend:
+  pong: # Port 3002
+    container_name: pong
+    build: ./containers/pong/
+    networks:
+        - ft_test
+
+  backend: # Port 3001
     container_name: backend
     build: ./containers/backend/.
-    ports:
-      - 3000:3000
+    networks:
+        - ft_test
+    depends_on:
+      - pong
+
 
   frontend:
     container_name: frontend
     build: ./containers/frontend/.
+    ports:
+      - 3000:3000
+    networks:
+        - ft_test
+    depends_on:
+      - pong
+      - backend
