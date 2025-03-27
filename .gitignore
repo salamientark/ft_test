@@ -1,4 +1,11 @@
-**/node_modules/
 .env
-**/*.db
-**/frontend/conf/**/*js
+
+### GLOBAL NODE MODULES ###
+**/node_modules/
+**/dist/
+
+### FRONTEND CONTAINER ###
+**/frontend/conf/**/*.js
+
+### PONG CONTAINER ###
+**/pong/conf/**/*.js
