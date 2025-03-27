@@ -1,7 +1,10 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
-export default async function getRoot(request, reply) {
+export default async function getGame(request. reply) {
 	try {
+		/* Prasing + Error check to implement */
+		
+
 		console.log("Fetching game");
 		const response = await  fetch('http://pong:3002/');
 		if (!response.ok)
@@ -9,7 +12,9 @@ export default async function getRoot(request, reply) {
 		console.log("Fetching game");
 		reply.header('Content-Type', 'application/javascript');
 		return reply.code(200).send(await response.text());
-	} catch (err) {
-		reply.code(500).send("Internal server error");
+		} catch (err) {
+			reply.code(500).send("Internal server error");
+		}
+
 	}
 }

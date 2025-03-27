@@ -8,9 +8,9 @@
 	"types": ["node"],                  /* Type declaration files to be included in compilation. */
 	"moduleResolution": "node",
 	"baseUrl": "./",                                     /* Base directory to resolve non-absolute module names. */
-	"outDir": "./dist",                                  /* Redirect output structure to the directory. */
+	// "outDir": "./dist",                                  /* Redirect output structure to the directory. */
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
 	"strict": true                                      /* Enable all strict type-checking options. */
   },
-  "include": ["src/*.ts", "src/**/*.ts"]
+  "include": ["src/**/*.ts"]
 }

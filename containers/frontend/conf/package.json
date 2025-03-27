@@ -4,7 +4,9 @@
   "main": "dist/server.js",
   "scripts": {
     "clean": "rm -rf dist && rm -rf src/public/script/* && rm -rf node_modules/",
-    "build": "tsc -p tsconfig.json",
+	"build:backend": "tsc -p tsconfig.backend.json",
+	"build:frontend": "tsc -p tsconfig.frontend.json",
+    "build": "npm run build:backend && npm run build:frontend",
 	"dev": "nodemon",
 	"start": "npm run build && node ./dist/server.js"
   },
