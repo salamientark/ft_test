@@ -12,6 +12,8 @@ RUN npm install -D typescript @types/node
 
 COPY --chown=node:node conf ./
 
+RUN npm run build
+
 EXPOSE 3002
 
 ENTRYPOINT ["npm"]

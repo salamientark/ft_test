@@ -575,11 +575,10 @@ function resizeCanvas() {
  */
 function get_index() {
 	const	xhttp = new XMLHttpRequest();
-	const	main_div = document.getElementById("main");
 
 	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200 && main_div) {
-			main_div.innerHTML = this.responseText;
+		if (this.readyState == 4 && this.status == 200) {
+			document.body.innerHTML = this.responseText;
 		}
 	};
 
