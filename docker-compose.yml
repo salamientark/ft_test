@@ -10,6 +10,12 @@ networks:
 # ############################################################################ #
 services:
 
+  mysql: # Port 3004
+    container_name: mysql
+    build: ./containers/mysql/.
+    networks:
+        - ft_test
+
   pong: # Port 3002
     container_name: pong
     build: ./containers/pong/
@@ -22,10 +28,11 @@ services:
     networks:
         - ft_test
     depends_on:
+      - mysql
       - pong
 
 
-  frontend:
+  frontend: # Port 3000
     container_name: frontend
     build: ./containers/frontend/.
     ports:
@@ -33,5 +40,4 @@ services:
     networks:
         - ft_test
     depends_on:
-      - pong
       - backend

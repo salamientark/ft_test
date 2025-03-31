@@ -2,6 +2,7 @@ import fastify, { FastifyInstance } from 'fastify';
 import path from 'node:path';
 import fastifyStatic from '@fastify/static';
 import fastifyView from "@fastify/view";
+import fastifyHttpProxy from "@fastify/http-proxy";
 
 import ejs from "ejs";
 import routes from "./routes/routes"
@@ -29,6 +30,12 @@ const initServer = async (): Promise<FastifyInstance> => {
 	frontend.register(fastifyStatic, {
 		root: path.join(__dirname, "../src/public"),
 		prefix: "/public",
+	});
+
+	frontend.register(fastifyHttpProxy, {
+		upstream: "http://backend:3001",
+		prefix: "/db",
+		rewritePrefix: "/db"
 	});
 
 	frontend.register(routes);

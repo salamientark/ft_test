@@ -1,11 +1,17 @@
 import fastify from 'fastify';
 import routes from "./routes/routes.js"
+import fastifyHttpProxy from '@fastify/http-proxy';
 
 /* Create fastify Instance */
 const backend = new fastify({ logger: true });
 
 /* Register fastify plugin */
 const initServer= async () => {
+	backend.register(fastifyHttpProxy, {
+		upstream: "http://mysql:3004",
+		prefix: "/db",
+	});
+
 	backend.register(routes);
 
 	return (backend);

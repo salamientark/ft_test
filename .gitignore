@@ -9,3 +9,6 @@
 
 ### PONG CONTAINER ###
 **/pong/conf/**/*.js
+
+### DB CONTAINER ###
+**/mysql/conf/db/

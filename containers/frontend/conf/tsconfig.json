@@ -12,5 +12,6 @@
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
 	"strict": true                                      /* Enable all strict type-checking options. */
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
