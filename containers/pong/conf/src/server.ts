@@ -18,11 +18,11 @@ pong.register(fastifyStatic, {
 });
 
 
-pong.get('/', (request: FastifyRequest, reply: FastifyReply) => {
+pong.get('/public/pong.js', (request: FastifyRequest, reply: FastifyReply) => {
 	console.log(__dirname);
 	console.log("pong");
 	// return reply.sendFile("../src/public/pong.js");
-	return reply.sendFile("pong.js");
+	return reply.header('Cache-Control', 'no-cache').sendFile("pong.js");
 });
 
 pong.listen({ host: '0.0.0.0', port: 3002 }, (err: Error | null, address: string) => {

@@ -1,0 +1,15 @@
+<div id="2fa-auth-enc" class="container">
+	<div id="2fa-auth">
+		<p>Enter the 2FA code :</p>
+		<form id="2fa-form" action="/auth/2fa" method="post">
+			<div class="login-info">
+				<label for="2fa-code">2FA Code:</label>
+				<input type="text" id="2fa-code" name="2fa-code" required><br>
+			</div>
+			<div class="login-button">
+				<button id="2fa_button" type="button" onclick="verify_2fa()">Login</button>
+				<button type="button" onclick="location.href='#'">Resend 2FA code</button>
+			</div>
+		</form>
+	</div>
+</div>

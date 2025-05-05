@@ -1,14 +1,63 @@
 /* ************************************************************************** */
 /*                                GLOBAL VARIABLES                            */
 /* ************************************************************************** */
+/**
+ * @brief Go back to login page
+ */
+function get_index() {
+	const	xhttp = new XMLHttpRequest();
+
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.body.innerHTML = this.responseText;
+		}
+	};
+
+	xhttp.open("GET", "/auth/login", true);
+	xhttp.send();
+}
+
+function reset_button_handler() {
+	start_button.style.display = 'block';
+	reset_button.style.display = 'none';
+}
+
+function start_button_handler() {
+	start_button.style.display = 'none';
+	reset_button.style.display = 'block';
+	/* Start game */
+	resizeCanvas();
+	launch_game("Jojo", "Lili");
+}
+
+
+var canvas: HTMLCanvasElement = document.getElementById("pong_canvas") as HTMLCanvasElement;
+if (!canvas)
+	throw new Error("Canvas not found");
+var ctx: CanvasRenderingContext2D = canvas.getContext("2d") as CanvasRenderingContext2D;
+if (!ctx)
+	throw new Error("Context not found");
+var	start_button: HTMLButtonElement = document.getElementById("button_start_game") as HTMLButtonElement;
+if (!start_button)
+	throw new Error("Start button not found.");
+var	reset_button: HTMLButtonElement = document.getElementById("reset_button") as HTMLButtonElement;
+if (!reset_button)
+	throw new Error("Reset button not found.");
+var	index_button: HTMLButtonElement = document.getElementById("index_button") as HTMLButtonElement;
+if (!index_button)
+	throw new Error("Index button not found.");
+
+document.addEventListener("keydown", pressedKeyHandler, false);
+document.addEventListener("keyup", releasedKeyHandler, false);
+window.addEventListener("resize", resizeCanvas); /* Resize
 /*
  * Defnining canvas and Context
  */
-var canvas: HTMLCanvasElement;
-var ctx: CanvasRenderingContext2D;
-var	start_button: HTMLButtonElement;
-var	reset_button: HTMLButtonElement;
-var	index_button: HTMLButtonElement;
+// var canvas: HTMLCanvasElement;
+// var ctx: CanvasRenderingContext2D;
+// var	start_button: HTMLButtonElement;
+// var	reset_button: HTMLButtonElement;
+// var	index_button: HTMLButtonElement;
 
 var	rotate: boolean = false;
 
@@ -571,70 +620,39 @@ function resizeCanvas() {
 /*                                    SPECIAL                                 */
 /* ************************************************************************** */
 /**
- * @brief Go back to login page
- */
-function get_index() {
-	const	xhttp = new XMLHttpRequest();
-
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.body.innerHTML = this.responseText;
-		}
-	};
-
-	xhttp.open("GET", "/auth/login", true);
-	xhttp.send();
-}
-
-/**
  * @brief Load the different event for the pong game
  *
  * This function should be called when the rigth html page is loaded
  */
-function load_script() {
-	try {
-		/* Set var */
-		start_button = document.getElementById("button_start_game") as HTMLButtonElement;
-		if (!start_button)
-			throw new Error("Start button not found.");
-		reset_button = document.getElementById("reset_button") as HTMLButtonElement;
-		if (!reset_button)
-			throw new Error("Reset button not found.");
-		index_button = document.getElementById("index_button") as HTMLButtonElement;
-		if (!index_button)
-			throw new Error("Index button not found.");
-		canvas = document.getElementById("pong_canvas") as HTMLCanvasElement;
-		if (!canvas)
-			throw new Error("Canvas not found");
-		ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-		if (!ctx)
-			throw new Error("Context not found");
-
-		/* Set events listeners */
-		start_button.addEventListener("click", () => {
-			// canvas.style.display = 'block';
-			start_button.style.display = 'none';
-			reset_button.style.display = 'block';
-			/* Start game */
-			resizeCanvas();
-			launch_game("Jojo", "Lili");
-		});
-		reset_button.addEventListener("click", () => {
-			// canvas.style.display = 'none';
-			start_button.style.display = 'block';
-			reset_button.style.display = 'none';
-
-		});
-		index_button.addEventListener("click", get_index);
-		document.addEventListener("keydown", pressedKeyHandler, false);
-		document.addEventListener("keyup", releasedKeyHandler, false);
-		window.addEventListener("resize", resizeCanvas); /* Resize
-														  * "Responsivness" attempt
-														  */
-	}
-	catch(err: any) {
-		console.log(err);
-	}
-}
-
-load_script(); /* Should be called when the right html is loaded */
+// function load_script() {
+// 	try {
+// 		/* Set var */
+// 		start_button = document.getElementById("button_start_game") as HTMLButtonElement;
+// 		if (!start_button)
+// 			throw new Error("Start button not found.");
+// 		reset_button = document.getElementById("reset_button") as HTMLButtonElement;
+// 		if (!reset_button)
+// 			throw new Error("Reset button not found.");
+// 		index_button = document.getElementById("index_button") as HTMLButtonElement;
+// 		if (!index_button)
+// 			throw new Error("Index button not found.");
+// 		canvas = document.getElementById("pong_canvas") as HTMLCanvasElement;
+// 		if (!canvas)
+// 			throw new Error("Canvas not found");
+// 		ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+// 		if (!ctx)
+// 			throw new Error("Context not found");
+//
+// 		index_button.addEventListener("click", get_index);
+// 		document.addEventListener("keydown", pressedKeyHandler, false);
+// 		document.addEventListener("keyup", releasedKeyHandler, false);
+// 		window.addEventListener("resize", resizeCanvas); /* Resize
+// 														  * "Responsivness" attempt
+// 														  */
+// 	}
+// 	catch(err: any) {
+// 		console.log(err);
+// 	}
+// }
+//
+// load_script(); /* Should be called when the right html is loaded */

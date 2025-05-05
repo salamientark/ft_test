@@ -6,6 +6,7 @@ import fastifyHttpProxy from "@fastify/http-proxy";
 
 import ejs from "ejs";
 import routes from "./routes/routes"
+import preHandler from "./config/preHandler";
 
 /*
  * Create fastify instance
@@ -32,10 +33,18 @@ const initServer = async (): Promise<FastifyInstance> => {
 		prefix: "/public",
 	});
 
+	frontend.register(preHandler);
+
 	frontend.register(fastifyHttpProxy, {
 		upstream: "http://backend:3001",
 		prefix: "/db",
 		rewritePrefix: "/db"
+	});
+
+	frontend.register(fastifyHttpProxy, {
+		upstream: "http://backend:3001",
+		prefix: "/game/pong/public",
+		rewritePrefix: "/game/pong/public"
 	});
 
 	frontend.register(routes);

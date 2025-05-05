@@ -12,6 +12,12 @@ const initServer= async () => {
 		prefix: "/db",
 	});
 
+	backend.register(fastifyHttpProxy, {
+		upstream: "http://pong:3002",
+		prefix: "/game/pong/public",
+		rewritePrefix: "/public",
+	});
+
 	backend.register(routes);
 
 	return (backend);

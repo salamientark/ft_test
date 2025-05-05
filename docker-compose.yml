@@ -16,6 +16,12 @@ services:
     networks:
         - ft_test
 
+  jwt: # Port 3003
+    container_name: jwt
+    build: ./containers/jwt/.
+    networks:
+        - ft_test
+
   pong: # Port 3002
     container_name: pong
     build: ./containers/pong/
@@ -29,8 +35,8 @@ services:
         - ft_test
     depends_on:
       - mysql
+      - jwt
       - pong
-
 
   frontend: # Port 3000
     container_name: frontend
