@@ -69,6 +69,19 @@ function register() {
 	xhttp.send(formData);
 }
 
+/**
+  * @brief Logout the user
+  *
+  * Remove the access token from the cookies then reload page view
+  */
+function logout() {
+	document.cookie = "access_token=;expires=" + new Date(0).toUTCString();
+	// browser.cookies.remove({
+	// 	name: 'access_token',
+	// });
+	getLoginView("Logged out");
+}
+
 
 /* ************************************************************************** */
 /*                          LOGIN PAGE SCRIPTS                                */

@@ -6,7 +6,9 @@ async function jwtHandler(fastify: FastifyInstance, options: FastifyPluginOption
 	fastify.decorate("authenticate",
 			async function (request: FastifyRequest, reply: FastifyReply) {
 		try {
-			const	token_header = request.headers["access-token"];
+			console.log(request.cookies);
+			const	token_header = request.cookies.access_token;
+			// const	token_header = request.headers["access_token"];
 			if (!token_header)
 				throw new Error("No token provided");
 
@@ -14,6 +16,9 @@ async function jwtHandler(fastify: FastifyInstance, options: FastifyPluginOption
 			const response = await fetch("http://jwt:3003/verify",
 			{
 				method: "POST",
+				headers: {
+					'Content-Type': 'application/json',
+				},
 				body: JSON.stringify({
 					token: token_header
 				}),
@@ -29,7 +34,7 @@ async function jwtHandler(fastify: FastifyInstance, options: FastifyPluginOption
 
 		} catch (err) {
 			console.log(err);
-			return reply.view("login", { title: "Login" });
+			return reply.code(401).view("login", { title: "Login" });
 		}
 
 	});

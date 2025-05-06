@@ -3,6 +3,7 @@ import path from 'node:path';
 import fastifyStatic from '@fastify/static';
 import fastifyView from "@fastify/view";
 import fastifyHttpProxy from "@fastify/http-proxy";
+import fastifyCookie from "@fastify/cookie";
 
 import ejs from "ejs";
 import routes from "./routes/routes"
@@ -19,6 +20,11 @@ const frontend: FastifyInstance = fastify({
  * Register fastify plugin
  */
 const initServer = async (): Promise<FastifyInstance> => {
+	frontend.register(fastifyCookie, {
+		secret: "my-secret", // for cookies signature
+		parseOptions: {}     // options for parsing cookies
+	});
+	
 	await frontend.register(fastifyView, {
 		engine: {
 			ejs,

@@ -12,7 +12,7 @@ export default async function login(request, reply) {
 		console.log(body);
 		// const	json = json.parse(body);
 		// console.log(json);
-		const	token = request.server.jwt.sign({ email: body.email, username: body.username, expiresIn: '1h' });
+		const	token = request.server.jwt.sign({ email: body.email, username: body.username }, { expiresIn: '1h' });
 		console.log(token);
 		return reply.code(200).send({ token: token });
 	} catch (err) {

@@ -2,6 +2,8 @@ import fetch from "node-fetch"
 
 export default async function verifyToken(request, reply) {
 	try {
+		console.log(request.body);
+		console.log(request.body.token);
 		const token = request.body.token;
 		if (!token)
 			throw new Error("No token found");
