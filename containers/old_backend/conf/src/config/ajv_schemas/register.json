@@ -1,0 +1,30 @@
+{
+	"$id": "register_form",
+	"type": "object",
+	"properties": {
+		"email": {
+			"type": "string",
+			"pattern": "^[a-zA-Z0-9-\\.]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z0-9-]{2,4}$"
+		},
+		"username": {
+			"type": "string",
+			"minLength": 3,
+			"maxLength": 25,
+			"pattern": "^[a-zA-Z0-9]+(?:[ _-][a-zA-Z0-9]+)*$"
+		},
+		"password": {
+			"type": "string",
+			"minLength": 8,
+			"maxLength": 100,
+			"pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])"
+		},
+		"confirm_password": {
+			"type": "string",
+			"minLength": 8,
+			"maxLength": 100,
+			"pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])"
+		}
+	},
+	"required": ["email", "username", "password", "confirm_password"],
+	"additionalProperties": false
+}
